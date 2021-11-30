@@ -15,5 +15,5 @@ sealed class UserListActions {
     class UserListDisplayed(val userNameList: List<String>) : UserListActions()
 
     object WriteToDbUserInfo : UserListActions()
-    class UserInfoAddedToDB(val list: List<UserArray>): UserListActions()
+    class UserInfoAddedToDB(): UserListActions()
 }

@@ -2,7 +2,6 @@ package com.natife.example.networkandbdapp.ui.userListScreen
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,16 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.natife.example.networkandbdapp.R
-import com.natife.example.networkandbdapp.api.Requests
-import com.natife.example.networkandbdapp.api.RetrofitClient
 import com.natife.example.networkandbdapp.databinding.UserListFragmentBinding
-import com.natife.example.networkandbdapp.models.User
-import com.natife.example.networkandbdapp.models.UserArray
 import com.natife.example.networkandbdapp.ui.userListScreen.useCase.UserNetworkDataLoadUseCase
-import com.natife.example.networkandbdapp.ui.userListScreen.useCase.UserListDisplayUseCase
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class UserListFragment(context: Context) : Fragment(R.layout.user_list_fragment) {
 
