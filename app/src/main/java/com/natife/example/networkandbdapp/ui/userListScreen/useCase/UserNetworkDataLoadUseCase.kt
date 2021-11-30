@@ -1,7 +1,5 @@
 package com.natife.example.networkandbdapp.ui.userListScreen.useCase
 
-import android.content.Context
-import android.widget.Toast
 import com.natife.example.networkandbdapp.api.Requests
 import com.natife.example.networkandbdapp.api.RetrofitClient
 import com.natife.example.networkandbdapp.base.UseCase
@@ -13,36 +11,34 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UserDataLoadUseCase() : UseCase<UserListState, UserListActions> {
+class UserNetworkDataLoadUseCase : UseCase<UserListState, UserListActions> {
 
-    private var userList = ArrayList<UserArray>()
+    private var userList = listOf<User>()
 
     override fun execute(state: UserListState, action: UserListActions): UserListActions {
-         if (action is UserListActions.LoadingUserData) {
-             loadUserDataFromNetwork()
-             return UserListActions.None
+        return if (action is UserListActions.LoadUserData) {
+            loadUserDataFromNetwork()
+            UserListActions.UserDataLoaded(userList)
         } else {
-            return UserListActions.None
+            UserListActions.None
         }
     }
 
     override fun canHandle(action: UserListActions): Boolean {
-        return action is UserListActions.LoadingUserData
+        return action is UserListActions.LoadUserData
     }
 
     private fun loadUserDataFromNetwork() {
         val retrofit = RetrofitClient.getInstance()?.create(Requests::class.java)
         val call = retrofit?.getUserInfo(10)
-        call?.enqueue(object : Callback<User> {
-            override fun onResponse(call: Call<User>, response: Response<User>) {
-                TODO("Not yet implemented")
+        call?.enqueue(object : Callback<UserArray> {
+            override fun onResponse(call: Call<UserArray>, response: Response<UserArray>) {
+                userList = response.body()?.userArray ?: emptyList()
             }
 
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                TODO("Not yet implemented")
+            override fun onFailure(call: Call<UserArray>, t: Throwable) {
+                t.printStackTrace()
             }
-
-
         })
     }
 }

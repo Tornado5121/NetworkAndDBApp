@@ -2,7 +2,6 @@ package com.natife.example.networkandbdapp.ui.userListScreen
 
 import com.natife.example.networkandbdapp.base.BaseViewModel
 import com.natife.example.networkandbdapp.base.UseCase
-import com.natife.example.networkandbdapp.ui.userListScreen.useCase.UserListDisplayUseCase
 
 class UserListViewModel(
     UserListReducer: UserListReducer,
@@ -13,7 +12,15 @@ class UserListViewModel(
 ) {
 
     fun getUsers() {
-        action(UserListActions.LoadingUserData)
+        action(UserListActions.LoadUserData)
+    }
+
+    fun addToDbData() {
+        action(UserListActions.WriteToDbUserInfo)
+    }
+
+    fun displayUserList() {
+        action(UserListActions.DisplayUserList)
     }
 
 }
