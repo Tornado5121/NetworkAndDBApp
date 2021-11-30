@@ -1,12 +1,21 @@
 package com.natife.example.networkandbdapp.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import androidx.appcompat.app.AppCompatActivity
 import com.natife.example.networkandbdapp.R
+import com.natife.example.networkandbdapp.databinding.ActivityMainBinding
+import com.natife.example.networkandbdapp.ui.userListScreen.UserListFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
+        val userListFragment = UserListFragment(this)
+        supportFragmentManager.beginTransaction()
+            .add(R.id.main_activity_fragment_container, userListFragment).commit()
+
     }
 }
