@@ -9,24 +9,27 @@
         android:id="@+id/user_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="30dp" />
+        android:paddingVertical="30dp"/>
 
     <TextView
         android:id="@+id/user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         android:paddingVertical="30dp"/>
 
     <TextView
         android:id="@+id/user_last_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="30dp"/>
+        android:paddingVertical="30dp"
+        android:textAlignment="center"/>
 
     <TextView
         android:id="@+id/user_gender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="30dp"/>
+        android:paddingVertical="30dp"
+        android:textAlignment="center"/>
 
 </LinearLayout>

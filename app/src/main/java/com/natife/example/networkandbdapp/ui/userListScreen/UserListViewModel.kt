@@ -1,26 +1,34 @@
 package com.natife.example.networkandbdapp.ui.userListScreen
 
-import com.natife.example.networkandbdapp.base.BaseViewModel
-import com.natife.example.networkandbdapp.base.UseCase
+import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.natife.example.networkandbdapp.UserRepository
+import com.natife.example.networkandbdapp.db.UserDataBase
+import com.natife.example.networkandbdapp.models.UserArray
+import kotlinx.coroutines.launch
 
-class UserListViewModel(
-    UserListReducer: UserListReducer,
-    listUseCase: List<UseCase<UserListState,UserListActions>>
-) : BaseViewModel<UserListState, UserListActions>(
-    UserListReducer,
-    listUseCase
-) {
+class UserListViewModel(context: Context) : ViewModel() {
 
-    fun getUsers() {
-        action(UserListActions.LoadUserData)
+    private val repository = UserRepository(context, UserDataBase.getInstance(context))
+
+    private val userRepository = UserRepository(context, UserDataBase.getInstance(context))
+
+    val userList = userRepository.users
+
+    private val _myResponse: MutableLiveData<UserArray> = MutableLiveData()
+    val myResponse: LiveData<UserArray>
+        get() = _myResponse
+
+    init {
+        refreshUserDB()
     }
 
-    fun addToDbData() {
-        action(UserListActions.WriteToDbUserInfo)
+    private fun refreshUserDB() {
+        viewModelScope. launch {
+            repository.refreshUsers()
+        }
     }
-
-    fun displayUserList() {
-        action(UserListActions.DisplayUserList)
-    }
-
 }

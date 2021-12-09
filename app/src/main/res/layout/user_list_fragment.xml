@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     android:name="com.natife.example.project1.ui.ItemListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/user_recycler_view">
 
-</ListView>
+</androidx.recyclerview.widget.RecyclerView>
