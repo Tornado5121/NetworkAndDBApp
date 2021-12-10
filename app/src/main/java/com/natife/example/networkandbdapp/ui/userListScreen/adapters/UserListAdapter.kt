@@ -12,12 +12,6 @@ class UserListAdapter(
     private val onClick: (DomainUser) -> Unit
 ) : ListAdapter<DomainUser, UserListAdapter.ItemViewHolder>(ItemDiffUtilCallback()) {
 
-    var userList: List<DomainUser> = emptyList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         return ItemViewHolder.from(parent)
     }
@@ -46,8 +40,6 @@ class UserListAdapter(
             }
         }
     }
-
-
 
     class ItemDiffUtilCallback : DiffUtil.ItemCallback<DomainUser>() {
         override fun areItemsTheSame(oldItem: DomainUser, newItem: DomainUser): Boolean {

@@ -13,9 +13,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
-
-        val fragment = UserListFragment()
-        supportFragmentManager.beginTransaction()
-            .add(R.id.main_activity_fragment_container, fragment).commit()
+        if (supportFragmentManager.fragments.isEmpty()) {
+            val fragment = UserListFragment()
+            supportFragmentManager.beginTransaction()
+                .add(R.id.main_activity_fragment_container, fragment).commit()
+        }
     }
 }

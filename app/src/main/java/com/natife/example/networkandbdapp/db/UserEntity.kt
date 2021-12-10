@@ -23,7 +23,6 @@ data class UserEntity(
     val userPhotoLink: String
 )
 
-
 fun List<UserEntity>.asDomainModel(): List<DomainUser> {
     return map {
         DomainUser(
@@ -44,5 +43,4 @@ fun UserEntity.asDomainModel(): DomainUser {
             gender = userGender,
             userPicture = userPhotoLink
         )
-
 }

@@ -15,13 +15,3 @@ data class User(
     @SerializedName("picture")
     val userPicture: UserPicture
 )
-
-//fun UserArray.asDomainModel(): List<User> {
-//    return userArray.map {
-//        User(
-//            userGender = it.userGender,
-//            userFullName = it.userFullName,
-//            userPicture = it.userPicture,
-//        )
-//    }
-

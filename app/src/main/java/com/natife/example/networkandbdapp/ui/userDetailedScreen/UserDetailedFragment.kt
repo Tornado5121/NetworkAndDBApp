@@ -39,22 +39,7 @@ class UserDetailedFragment : Fragment(R.layout.user_detailed_fragment) {
             binding.userGender.text = it.gender
             Glide.with(this).load(it.userPicture).into(binding.userPhoto)
         })
-
-
     }
-//        detailedViewModel.detailedUser.observe(viewLifecycleOwner, {
-//            binding.userName.text = it.userFullName?.name
-//            binding.userLastName.text = it.userFullName?.lastName
-//            binding.userGender.text = it.userGender
-//        })
-
-//        detailedViewModel.userPicture.observe(viewLifecycleOwner, {
-//            binding.userPhoto.setImageURI(it.userPhotoLink.toUri())
-//
-//            d("LINK_PICTURE", it.userPhotoLink)
-//
-//        })
-
 
     companion object {
         private const val KEY_NAME: String = "user_name"

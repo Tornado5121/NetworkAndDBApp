@@ -10,9 +10,9 @@ import com.natife.example.networkandbdapp.db.UserDataBase
 import com.natife.example.networkandbdapp.domain.DomainUser
 import kotlinx.coroutines.launch
 
-class UserDetailedViewModel(private val context: Context) : ViewModel() {
+class UserDetailedViewModel(context: Context) : ViewModel() {
 
-    val userRepository = UserRepository(context, UserDataBase.getInstance(context))
+    private val userRepository = UserRepository(UserDataBase.getInstance(context))
 
     private val _detailedUser = MutableLiveData<DomainUser>()
     val detailedUser: LiveData<DomainUser> = _detailedUser
@@ -21,6 +21,5 @@ class UserDetailedViewModel(private val context: Context) : ViewModel() {
         viewModelScope.launch {
             _detailedUser.value = userRepository.getSingleUserInfo(name)
         }
-
     }
 }
