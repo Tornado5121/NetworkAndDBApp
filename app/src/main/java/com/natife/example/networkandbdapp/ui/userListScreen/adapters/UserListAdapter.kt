@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.natife.example.networkandbdapp.databinding.UserAdapterItemBinding
-import com.natife.example.networkandbdapp.domain.DomainUser
+import com.natife.example.networkandbdapp.db.UserEntity
 
 class UserListAdapter(
-    private val onClick: (DomainUser) -> Unit
-) : ListAdapter<DomainUser, UserListAdapter.ItemViewHolder>(ItemDiffUtilCallback()) {
+    private val onClick: (UserEntity) -> Unit
+) : ListAdapter<UserEntity, UserListAdapter.ItemViewHolder>(ItemDiffUtilCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         return ItemViewHolder.from(parent)
@@ -23,7 +23,7 @@ class UserListAdapter(
     class ItemViewHolder(private val binding: UserAdapterItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(data: DomainUser, click: (DomainUser) -> Unit) {
+        fun bind(data: UserEntity, click: (UserEntity) -> Unit) {
             with(binding) {
                 userNameView.text = data.name
                 root.setOnClickListener {
@@ -41,12 +41,12 @@ class UserListAdapter(
         }
     }
 
-    class ItemDiffUtilCallback : DiffUtil.ItemCallback<DomainUser>() {
-        override fun areItemsTheSame(oldItem: DomainUser, newItem: DomainUser): Boolean {
+    class ItemDiffUtilCallback : DiffUtil.ItemCallback<UserEntity>() {
+        override fun areItemsTheSame(oldItem: UserEntity, newItem: UserEntity): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: DomainUser, newItem: DomainUser): Boolean {
+        override fun areContentsTheSame(oldItem: UserEntity, newItem: UserEntity): Boolean {
             return oldItem == newItem
         }
     }

@@ -13,11 +13,8 @@ interface UserDao {
     @Query("SELECT * from userentity")
     fun getAllUsersByLiveData(): LiveData<List<UserEntity>>
 
-    @Query("SELECT * from userentity")
-    fun getAllUser(): List<UserEntity>
-
     @Query("SELECT * from userentity WHERE id = :key")
-    fun getUser(key: String?): UserEntity
+    fun getUser(key: String): UserEntity
 
     @Query("DELETE FROM userentity")
     fun clearAllUsers()

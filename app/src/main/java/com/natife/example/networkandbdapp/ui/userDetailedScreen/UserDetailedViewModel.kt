@@ -5,21 +5,27 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.natife.example.networkandbdapp.UserRepository
 import com.natife.example.networkandbdapp.db.UserDataBase
-import com.natife.example.networkandbdapp.domain.DomainUser
+import com.natife.example.networkandbdapp.db.UserEntity
+import com.natife.example.networkandbdapp.repositories.UserRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class UserDetailedViewModel(context: Context) : ViewModel() {
 
+
     private val userRepository = UserRepository(UserDataBase.getInstance(context))
 
-    private val _detailedUser = MutableLiveData<DomainUser>()
-    val detailedUser: LiveData<DomainUser> = _detailedUser
+    private val _detailedUser = MutableLiveData<UserEntity>()
+    val detailedUser: LiveData<UserEntity> = _detailedUser
 
-    fun getUserDetailedInfo(name: String?) {
-        viewModelScope.launch {
-            _detailedUser.value = userRepository.getSingleUserInfo(name)
+    fun getUserDetailedInfo(id: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val user = userRepository.getSingleUserInfo(id)
+            withContext(Dispatchers.Main) {
+                _detailedUser.postValue(user)
+            }
         }
     }
 }

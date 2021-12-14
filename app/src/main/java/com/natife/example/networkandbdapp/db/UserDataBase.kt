@@ -11,7 +11,7 @@ abstract class UserDataBase : RoomDatabase() {
 
     abstract val userDao: UserDao
 
-    companion object {
+    companion object { //TODO not correct singleton
         @Volatile
         private var INSTANCE: UserDataBase? = null
 

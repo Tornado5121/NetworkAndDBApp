@@ -7,7 +7,7 @@ import com.natife.example.networkandbdapp.R
 import com.natife.example.networkandbdapp.databinding.ActivityMainBinding
 import com.natife.example.networkandbdapp.ui.userListScreen.UserListFragment
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -7,10 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.natife.example.networkandbdapp.R
 import com.natife.example.networkandbdapp.databinding.UserDetailedFragmentBinding
 
-class UserDetailedFragment : Fragment(R.layout.user_detailed_fragment) {
+class UserDetailedFragment : Fragment() {
 
     private lateinit var binding: UserDetailedFragmentBinding
     private val detailedViewModelFactory by lazy { UserListViewModelFactory(requireContext()) }
@@ -32,21 +31,21 @@ class UserDetailedFragment : Fragment(R.layout.user_detailed_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.let { detailedViewModel.getUserDetailedInfo(it.getString(KEY_NAME)) }
         detailedViewModel.detailedUser.observe(viewLifecycleOwner, {
             binding.userName.text = it.name
             binding.userLastName.text = it.lastName
-            binding.userGender.text = it.gender
-            Glide.with(this).load(it.userPicture).into(binding.userPhoto)
+            binding.userGender.text = it.userGender
+            Glide.with(this).load(it.userPhotoLink).into(binding.userPhoto)
         })
+        arguments?.let { detailedViewModel.getUserDetailedInfo(it.getString(KEY_ID).toString()) }
     }
 
     companion object {
-        private const val KEY_NAME: String = "user_name"
-        fun getUserDetailedFragmentInstance(name: String?): UserDetailedFragment {
+        private const val KEY_ID: String = "user_id"
+        fun getUserDetailedFragmentInstance(id: String): UserDetailedFragment {
             return UserDetailedFragment().apply {
                 arguments = Bundle().apply {
-                    putString(KEY_NAME, name)
+                    putString(KEY_ID, id)
                 }
             }
         }

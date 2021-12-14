@@ -1,13 +1,12 @@
 package com.natife.example.networkandbdapp.ui.userListScreen
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.natife.example.networkandbdapp.db.UserDataBase
+import com.natife.example.networkandbdapp.repositories.UserRepository
 
-class UserListViewModelFactory(private val context: Context, instance: UserDataBase) :
+class UserListViewModelFactory(private val repository: UserRepository) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return UserListViewModel(context) as T
+        return UserListViewModel(repository) as T
     }
 }

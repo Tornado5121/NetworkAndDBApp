@@ -3,7 +3,6 @@ package com.natife.example.networkandbdapp.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.natife.example.networkandbdapp.domain.DomainUser
 
 @Entity
 data class UserEntity(
@@ -23,24 +22,24 @@ data class UserEntity(
     val userPhotoLink: String
 )
 
-fun List<UserEntity>.asDomainModel(): List<DomainUser> {
-    return map {
-        DomainUser(
-            id = it.id,
-            name = it.name,
-            lastName = it.lastName,
-            gender = it.userGender,
-            userPicture = it.userPhotoLink
-        )
-    }
-}
-
-fun UserEntity.asDomainModel(): DomainUser {
-    return DomainUser(
-            id = id,
-            name = name,
-            lastName = lastName,
-            gender = userGender,
-            userPicture = userPhotoLink
-        )
-}
+//fun List<UserEntity>.asDomainModel(): List<DomainUser> {
+//    return map {
+//        it.asDomainModel()
+////            id = it.id,
+////            name = it.name,
+////            lastName = it.lastName,
+////            gender = it.userGender,
+////            userPicture = it.userPhotoLink
+////        )
+//    }
+//}
+//
+//fun UserEntity.asDomainModel(): DomainUser {
+//    return DomainUser(
+//            id = id,
+//            name = name,
+//            lastName = lastName,
+//            gender = userGender,
+//            userPicture = userPhotoLink
+//        )
+//}
