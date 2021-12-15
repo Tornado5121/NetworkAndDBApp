@@ -8,11 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.natife.example.networkandbdapp.databinding.UserDetailedFragmentBinding
+import com.natife.example.networkandbdapp.db.UserDataBase
+import com.natife.example.networkandbdapp.repositories.UserRepository
 
 class UserDetailedFragment : Fragment() {
 
     private lateinit var binding: UserDetailedFragmentBinding
-    private val detailedViewModelFactory by lazy { UserListViewModelFactory(requireContext()) }
+    private val userRepository by lazy { UserRepository(UserDataBase.getInstance(requireContext())) }
+    private val detailedViewModelFactory by lazy { UserListViewModelFactory(userRepository) }
+
     private val detailedViewModel by lazy {
         ViewModelProvider(
             this,
@@ -50,4 +54,5 @@ class UserDetailedFragment : Fragment() {
             }
         }
     }
+
 }

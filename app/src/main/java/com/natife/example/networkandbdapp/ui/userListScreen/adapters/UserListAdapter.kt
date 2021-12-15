@@ -10,7 +10,8 @@ import com.natife.example.networkandbdapp.db.UserEntity
 
 class UserListAdapter(
     private val onClick: (UserEntity) -> Unit
-) : ListAdapter<UserEntity, UserListAdapter.ItemViewHolder>(ItemDiffUtilCallback()) {
+) : ListAdapter<UserEntity,
+        UserListAdapter.ItemViewHolder>(ItemDiffUtilCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         return ItemViewHolder.from(parent)
@@ -35,7 +36,8 @@ class UserListAdapter(
         companion object {
             fun from(parent: ViewGroup): ItemViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = UserAdapterItemBinding.inflate(layoutInflater, parent, false)
+                val binding = UserAdapterItemBinding
+                    .inflate(layoutInflater, parent, false)
                 return ItemViewHolder(binding)
             }
         }
@@ -50,4 +52,5 @@ class UserListAdapter(
             return oldItem == newItem
         }
     }
+
 }

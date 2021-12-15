@@ -19,4 +19,5 @@ class MainActivity : AppCompatActivity() {
                 .add(R.id.main_activity_fragment_container, fragment).commit()
         }
     }
+
 }

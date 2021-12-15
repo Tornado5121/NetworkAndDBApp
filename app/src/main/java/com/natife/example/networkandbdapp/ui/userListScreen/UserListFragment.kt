@@ -18,22 +18,25 @@ import com.natife.example.networkandbdapp.ui.userListScreen.adapters.UserListAda
 class UserListFragment : Fragment() {
 
     private lateinit var binding: UserListFragmentBinding
-    private val userNameAdapter by lazy { UserListAdapter {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .addToBackStack("")
-            .replace(
-                R.id.main_activity_fragment_container,
-                UserDetailedFragment.getUserDetailedFragmentInstance(it.id)
-            ).commit()
-    } }
-
     private val userRepository by lazy { UserRepository(UserDataBase.getInstance(requireContext())) }
+
+    private val userNameAdapter by lazy {
+        UserListAdapter {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .addToBackStack("")
+                .replace(
+                    R.id.main_activity_fragment_container,
+                    UserDetailedFragment.getUserDetailedFragmentInstance(it.id)
+                ).commit()
+        }
+    }
 
     private val userListViewModelFactory by lazy {
         UserListViewModelFactory(
             userRepository
         )
     }
+
     private val userListViewModel: UserListViewModel by lazy {
         ViewModelProvider(
             this,
@@ -64,4 +67,5 @@ class UserListFragment : Fragment() {
                 }
             })
     }
+
 }

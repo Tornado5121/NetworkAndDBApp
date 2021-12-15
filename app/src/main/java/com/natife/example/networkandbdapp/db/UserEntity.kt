@@ -21,25 +21,3 @@ data class UserEntity(
     @ColumnInfo(name = "link to user photo")
     val userPhotoLink: String
 )
-
-//fun List<UserEntity>.asDomainModel(): List<DomainUser> {
-//    return map {
-//        it.asDomainModel()
-////            id = it.id,
-////            name = it.name,
-////            lastName = it.lastName,
-////            gender = it.userGender,
-////            userPicture = it.userPhotoLink
-////        )
-//    }
-//}
-//
-//fun UserEntity.asDomainModel(): DomainUser {
-//    return DomainUser(
-//            id = id,
-//            name = name,
-//            lastName = lastName,
-//            gender = userGender,
-//            userPicture = userPhotoLink
-//        )
-//}

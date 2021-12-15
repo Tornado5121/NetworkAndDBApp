@@ -5,6 +5,8 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface Requests {
+
     @GET("api/")
     suspend fun getUserInfo(@Query ("results") numbers: Int) : UserArray
+
 }

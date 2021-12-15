@@ -6,12 +6,16 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [UserEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [UserEntity::class],
+    version = 1,
+    exportSchema = false
+)
 abstract class UserDataBase : RoomDatabase() {
 
     abstract val userDao: UserDao
 
-    companion object { //TODO not correct singleton
+    companion object {
         @Volatile
         private var INSTANCE: UserDataBase? = null
 
@@ -32,4 +36,5 @@ abstract class UserDataBase : RoomDatabase() {
             }
         }
     }
+
 }

@@ -7,6 +7,7 @@ import androidx.room.Query
 
 @Dao
 interface UserDao {
+
     @Insert
     fun insert(users: List<UserEntity>)
 
@@ -18,4 +19,5 @@ interface UserDao {
 
     @Query("DELETE FROM userentity")
     fun clearAllUsers()
+
 }
