@@ -33,7 +33,8 @@ class UserListFragment : Fragment() {
 
     private val userListViewModelFactory by lazy {
         UserListViewModelFactory(
-            userRepository
+            userRepository,
+            UserDataBase.getInstance(requireContext())
         )
     }
 
@@ -58,13 +59,12 @@ class UserListFragment : Fragment() {
         binding.userRecyclerView.layoutManager = LinearLayoutManager(activity)
         binding.userRecyclerView.adapter = userNameAdapter
         binding.gettingUserInfoProgressBar.isVisible = true
-        userListViewModel.getUserNameList().observe(
+        userListViewModel.userFirstNameList.observe(
             viewLifecycleOwner,
             { userNameList ->
                 userNameAdapter.submitList(userNameList)
-                if (userNameList.isNotEmpty()) {
-                    binding.gettingUserInfoProgressBar.isVisible = false
-                }
+                binding.gettingUserInfoProgressBar.isVisible = false
+
             })
     }
 
