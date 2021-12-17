@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.natife.example.networkandbdapp.db.UserDataBase
-import com.natife.example.networkandbdapp.db.UserEntity
 import com.natife.example.networkandbdapp.db.asDomainModel
 import com.natife.example.networkandbdapp.domain.DomainUser
+import com.natife.example.networkandbdapp.domain.asDatabaseModel
 import com.natife.example.networkandbdapp.repositories.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,15 +27,7 @@ class UserListViewModel(
             val users = repository.getAllUsersByApi()
             if (users != null) {
                 database.userDao.clearAllUsers()
-                database.userDao.insert(users.map {
-                    UserEntity(
-                        id = it.id,
-                        name = it.name,
-                        lastName = it.lastName,
-                        userGender = it.gender,
-                        userPhotoLink = it.picture
-                    )
-                })
+                database.userDao.insert(users.asDatabaseModel())
             }
             val data = database.userDao.getAllUsers().asDomainModel()
 

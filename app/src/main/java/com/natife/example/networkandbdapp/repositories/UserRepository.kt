@@ -9,7 +9,6 @@ import com.natife.example.networkandbdapp.models.asDomainModel
 class UserRepository(private val database: UserDataBase) {
 
     private val numberRequestedUsers = 10
-//    val userListFromDb: LiveData<List<UserEntity>> = database.userDao.getAllUsersByLiveData()
 
     suspend fun getAllUsersByApi(): List<DomainUser>? {
         return try {

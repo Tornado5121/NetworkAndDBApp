@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.natife.example.networkandbdapp.databinding.UserAdapterItemBinding
-import com.natife.example.networkandbdapp.db.UserEntity
 import com.natife.example.networkandbdapp.domain.DomainUser
 
 class UserListAdapter(

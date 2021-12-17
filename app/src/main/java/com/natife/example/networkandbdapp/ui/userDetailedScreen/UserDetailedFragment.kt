@@ -14,8 +14,13 @@ import com.natife.example.networkandbdapp.repositories.UserRepository
 class UserDetailedFragment : Fragment() {
 
     private lateinit var binding: UserDetailedFragmentBinding
-    private val userRepository by lazy { UserRepository(UserDataBase.getInstance(requireContext())) }
-    private val detailedViewModelFactory by lazy { UserListViewModelFactory(userRepository) }
+    private val userRepository by lazy {
+        UserRepository(UserDataBase.getInstance(requireContext()))
+    }
+
+    private val detailedViewModelFactory by lazy {
+        UserListViewModelFactory(userRepository)
+    }
 
     private val detailedViewModel by lazy {
         ViewModelProvider(

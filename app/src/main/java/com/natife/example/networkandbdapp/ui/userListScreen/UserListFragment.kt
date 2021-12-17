@@ -17,8 +17,12 @@ import com.natife.example.networkandbdapp.ui.userListScreen.adapters.UserListAda
 
 class UserListFragment : Fragment() {
 
+    private val emptyText = "Sorry, there is no available data, check your internet and try again"
+
     private lateinit var binding: UserListFragmentBinding
-    private val userRepository by lazy { UserRepository(UserDataBase.getInstance(requireContext())) }
+    private val userRepository by lazy {
+        UserRepository(UserDataBase.getInstance(requireContext()))
+    }
 
     private val userNameAdapter by lazy {
         UserListAdapter {
@@ -59,12 +63,16 @@ class UserListFragment : Fragment() {
         binding.userRecyclerView.layoutManager = LinearLayoutManager(activity)
         binding.userRecyclerView.adapter = userNameAdapter
         binding.gettingUserInfoProgressBar.isVisible = true
+        binding.emptyMessageView.isVisible = false
         userListViewModel.userFirstNameList.observe(
             viewLifecycleOwner,
             { userNameList ->
                 userNameAdapter.submitList(userNameList)
                 binding.gettingUserInfoProgressBar.isVisible = false
-
+                if (userNameList.isEmpty()) {
+                    binding.emptyMessageView.isVisible = true
+                    binding.emptyMessageView.text = emptyText
+                }
             })
     }
 
