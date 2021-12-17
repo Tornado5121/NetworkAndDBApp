@@ -11,18 +11,18 @@ class UserRepository(private val database: UserDataBase) {
     private val numberRequestedUsers = 10
 
     suspend fun getAllUsers(): List<DomainUser> {
+
         return try {
             val users = RetrofitClient.api.getUserInfo(numberRequestedUsers).asDomainModel()
             if (users.isNotEmpty()) {
                 database.userDao.clearAllUsers()
                 database.userDao.insert(users.asDatabaseModel())
-                database.userDao.getAllUsers().asDomainModel()
-            } else {
-                 database.userDao.getAllUsers().asDomainModel()
             }
+            database.userDao.getAllUsers().asDomainModel()
+
         } catch (e: Exception) {
             e.printStackTrace()
-             emptyList()
+            database.userDao.getAllUsers().asDomainModel()
         }
     }
 

@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class UserListViewModel(
-    private val repository: UserRepository,
+    private val repository: UserRepository
 ) : ViewModel() {
 
     private val _userFirstNameList = MutableLiveData<List<DomainUser>>()
