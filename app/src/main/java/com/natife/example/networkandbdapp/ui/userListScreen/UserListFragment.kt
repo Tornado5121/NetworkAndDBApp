@@ -37,8 +37,7 @@ class UserListFragment : Fragment() {
 
     private val userListViewModelFactory by lazy {
         UserListViewModelFactory(
-            userRepository,
-            UserDataBase.getInstance(requireContext())
+            userRepository
         )
     }
 
