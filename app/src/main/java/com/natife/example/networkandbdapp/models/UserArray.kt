@@ -1,6 +1,5 @@
 package com.natife.example.networkandbdapp.models
 
-import com.natife.example.networkandbdapp.db.UserEntity
 import com.natife.example.networkandbdapp.domain.DomainUser
 
 data class UserArray(

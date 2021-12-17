@@ -17,7 +17,7 @@ import com.natife.example.networkandbdapp.ui.userListScreen.adapters.UserListAda
 
 class UserListFragment : Fragment() {
 
-    private val emptyText = "Sorry, there is no available data, check your internet and try again"
+    private val emptyText by lazy { getString(R.string.empty_text) }
 
     private lateinit var binding: UserListFragmentBinding
     private val userRepository by lazy {

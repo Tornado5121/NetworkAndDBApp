@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NetworkAndBDApp</string>
+    <string name="empty_text">Sorry, there is no available data, check your internet and try again</string>
 </resources>
