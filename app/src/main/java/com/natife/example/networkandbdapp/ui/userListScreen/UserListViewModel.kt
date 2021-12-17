@@ -22,5 +22,6 @@ class UserListViewModel(
             _userFirstNameList.postValue(repository.getAllUsers())
         }
     }
+
 }
 

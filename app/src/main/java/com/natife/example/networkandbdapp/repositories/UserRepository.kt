@@ -30,5 +30,4 @@ class UserRepository(private val database: UserDataBase) {
         return database.userDao.getUser(id).asDomainModel()
     }
 
-
 }
