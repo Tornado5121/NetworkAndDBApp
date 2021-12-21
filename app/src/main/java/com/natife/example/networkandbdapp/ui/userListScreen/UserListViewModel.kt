@@ -23,5 +23,10 @@ class UserListViewModel(
         }
     }
 
-}
+    fun getNextPageUserData() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _userFirstNameList.postValue(repository.getAllUsers())
+        }
+    }
 
+}

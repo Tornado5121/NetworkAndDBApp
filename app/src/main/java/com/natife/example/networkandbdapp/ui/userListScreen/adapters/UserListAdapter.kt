@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.natife.example.networkandbdapp.databinding.UserAdapterItemBinding
 import com.natife.example.networkandbdapp.domain.DomainUser
 
+private const val ITEM_PAGING = 3
+
 class UserListAdapter(
-    private val onClick: (DomainUser) -> Unit
+    private val onClick: (DomainUser) -> Unit,
+    private val itemHasReached: () -> Unit
 ) : ListAdapter<DomainUser,
         UserListAdapter.ItemViewHolder>(ItemDiffUtilCallback()) {
 
@@ -19,6 +22,9 @@ class UserListAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.bind(currentList[position], onClick)
+        if (position == itemCount - 1 - ITEM_PAGING) {
+            itemHasReached()
+        }
     }
 
     class ItemViewHolder(private val binding: UserAdapterItemBinding) :

@@ -25,14 +25,16 @@ class UserListFragment : Fragment() {
     }
 
     private val userNameAdapter by lazy {
-        UserListAdapter {
+        UserListAdapter({
             requireActivity().supportFragmentManager.beginTransaction()
                 .addToBackStack("")
                 .replace(
                     R.id.main_activity_fragment_container,
                     UserDetailedFragment.getUserDetailedFragmentInstance(it.id)
                 ).commit()
-        }
+        }, {
+            userListViewModel.getNextPageUserData()
+        })
     }
 
     private val userListViewModelFactory by lazy {
