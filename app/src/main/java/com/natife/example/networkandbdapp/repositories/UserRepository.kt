@@ -12,24 +12,18 @@ class UserRepository(private val database: UserDataBase) {
     private var isLoaded = true
 
     suspend fun getAllUsers(): List<DomainUser> {
-        return try {
-            isLoaded = false
-            if (isLoaded) {
-                database.userDao.clearAllUsers()
-            }
+        try {
             val users = RetrofitClient.api.getUserInfo(numberRequestedUsers).asDomainModel()
+            if (!isLoaded) {
+                database.userDao.clearAllUsers()
+                isLoaded = true
+            }
             database.userDao.insert(users.asDatabaseModel())
-            isLoaded = false
-            database.userDao.getAllUsers().asDomainModel()
         } catch (e: Exception) {
             e.printStackTrace()
-            isLoaded = true
-            if (!isLoaded) {
-                database.userDao.getAllUsers().asDomainModel()
-            }
-            emptyList()
+            isLoaded = false
         }
-
+        return database.userDao.getAllUsers().asDomainModel()
     }
 
     fun getSingleUserInfo(id: String): DomainUser {

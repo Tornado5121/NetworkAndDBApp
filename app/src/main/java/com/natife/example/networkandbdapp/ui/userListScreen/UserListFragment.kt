@@ -18,7 +18,6 @@ import com.natife.example.networkandbdapp.ui.userListScreen.adapters.UserListAda
 class UserListFragment : Fragment() {
 
     private val emptyText by lazy { getString(R.string.empty_text) }
-
     private lateinit var binding: UserListFragmentBinding
     private val userRepository by lazy {
         UserRepository(UserDataBase.getInstance(requireContext()))
@@ -56,16 +55,22 @@ class UserListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+
+
+
         binding = UserListFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.gettingUserInfoProgressBar.isVisible = true
-        binding.userRecyclerView.layoutManager = LinearLayoutManager(activity)
-        binding.userRecyclerView.adapter = userNameAdapter
-        binding.emptyMessageView.isVisible = false
+        with(binding) {
+            gettingUserInfoProgressBar.isVisible = true
+            userRecyclerView.layoutManager = LinearLayoutManager(activity)
+            userRecyclerView.adapter = userNameAdapter
+            emptyMessageView.isVisible = false
+        }
         userListViewModel.userFirstNameList.observe(
             viewLifecycleOwner,
             { userNameList ->

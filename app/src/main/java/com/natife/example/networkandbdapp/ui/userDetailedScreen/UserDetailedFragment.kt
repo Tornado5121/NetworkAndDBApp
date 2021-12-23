@@ -50,7 +50,9 @@ class UserDetailedFragment : Fragment() {
     }
 
     companion object {
+
         private const val KEY_ID: String = "user_id"
+
         fun getUserDetailedFragmentInstance(id: String): UserDetailedFragment {
             return UserDetailedFragment().apply {
                 arguments = Bundle().apply {

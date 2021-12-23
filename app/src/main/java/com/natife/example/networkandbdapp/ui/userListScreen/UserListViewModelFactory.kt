@@ -6,7 +6,6 @@ import com.natife.example.networkandbdapp.repositories.UserRepository
 
 class UserListViewModelFactory(
     private val repository: UserRepository
-
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")

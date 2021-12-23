@@ -1,6 +1,5 @@
 package com.natife.example.networkandbdapp.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -10,9 +9,6 @@ interface UserDao {
 
     @Insert
     fun insert(users: List<UserEntity>?)
-
-    @Query("SELECT * from userentity")
-    fun getAllUsersByLiveData(): LiveData<List<UserEntity>>
 
     @Query("SELECT * from userentity")
     fun getAllUsers(): List<UserEntity>

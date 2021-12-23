@@ -26,8 +26,7 @@ class UserListViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val newUsers = repository.getAllUsers()
-                if (newUsers != _userFirstNameList.value)
-                    _userFirstNameList.postValue((_userFirstNameList.value ?: listOf()) + newUsers)
+                _userFirstNameList.postValue(newUsers)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
