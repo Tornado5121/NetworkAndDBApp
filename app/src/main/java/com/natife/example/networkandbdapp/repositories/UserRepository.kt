@@ -9,21 +9,27 @@ import com.natife.example.networkandbdapp.models.asDomainModel
 
 class UserRepository(private val database: UserDataBase) {
     private val numberRequestedUsers = 10
+    private var isLoaded = true
 
     suspend fun getAllUsers(): List<DomainUser> {
-
         return try {
-            val users = RetrofitClient.api.getUserInfo(numberRequestedUsers).asDomainModel()
-            if (users.isNotEmpty()) {
+            isLoaded = false
+            if (isLoaded) {
                 database.userDao.clearAllUsers()
-                database.userDao.insert(users.asDatabaseModel())
             }
+            val users = RetrofitClient.api.getUserInfo(numberRequestedUsers).asDomainModel()
+            database.userDao.insert(users.asDatabaseModel())
+            isLoaded = false
             database.userDao.getAllUsers().asDomainModel()
-
         } catch (e: Exception) {
             e.printStackTrace()
-            database.userDao.getAllUsers().asDomainModel()
+            isLoaded = true
+            if (!isLoaded) {
+                database.userDao.getAllUsers().asDomainModel()
+            }
+            emptyList()
         }
+
     }
 
     fun getSingleUserInfo(id: String): DomainUser {

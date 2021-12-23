@@ -14,8 +14,7 @@ class UserListViewModel(
 ) : ViewModel() {
 
     private val _userFirstNameList = MutableLiveData<List<DomainUser>>()
-    val userFirstNameList: LiveData<List<DomainUser>>
-        get() = _userFirstNameList
+    val userFirstNameList: LiveData<List<DomainUser>> = _userFirstNameList
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -25,7 +24,13 @@ class UserListViewModel(
 
     fun getNextPageUserData() {
         viewModelScope.launch(Dispatchers.IO) {
-            _userFirstNameList.postValue(repository.getAllUsers())
+            try {
+                val newUsers = repository.getAllUsers()
+                if (newUsers != _userFirstNameList.value)
+                    _userFirstNameList.postValue((_userFirstNameList.value ?: listOf()) + newUsers)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 

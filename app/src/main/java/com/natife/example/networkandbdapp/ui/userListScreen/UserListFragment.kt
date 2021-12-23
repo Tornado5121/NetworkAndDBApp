@@ -33,6 +33,7 @@ class UserListFragment : Fragment() {
                     UserDetailedFragment.getUserDetailedFragmentInstance(it.id)
                 ).commit()
         }, {
+            binding.gettingUserInfoProgressBar.isVisible = true
             userListViewModel.getNextPageUserData()
         })
     }
@@ -61,9 +62,9 @@ class UserListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.gettingUserInfoProgressBar.isVisible = true
         binding.userRecyclerView.layoutManager = LinearLayoutManager(activity)
         binding.userRecyclerView.adapter = userNameAdapter
-        binding.gettingUserInfoProgressBar.isVisible = true
         binding.emptyMessageView.isVisible = false
         userListViewModel.userFirstNameList.observe(
             viewLifecycleOwner,
@@ -75,6 +76,6 @@ class UserListFragment : Fragment() {
                     binding.emptyMessageView.text = emptyText
                 }
             })
-    }
 
+    }
 }

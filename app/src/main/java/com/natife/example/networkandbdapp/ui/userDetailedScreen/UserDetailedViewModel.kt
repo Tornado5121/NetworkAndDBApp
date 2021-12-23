@@ -20,7 +20,7 @@ class UserDetailedViewModel(private val userRepository: UserRepository) : ViewMo
         viewModelScope.launch(Dispatchers.IO) {
             val user = userRepository.getSingleUserInfo(id)
             withContext(Dispatchers.Main) {
-                _detailedUser.value = user.asDatabaseModel()
+                _detailedUser.postValue(user.asDatabaseModel())
             }
         }
     }
