@@ -1,6 +1,7 @@
 package com.natife.example.networkandbdapp.ui.userListScreen
 
 import android.os.Bundle
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.natife.example.networkandbdapp.R
+import com.natife.example.networkandbdapp.api.RetrofitClient
 import com.natife.example.networkandbdapp.databinding.UserListFragmentBinding
 import com.natife.example.networkandbdapp.db.UserDataBase
 import com.natife.example.networkandbdapp.repositories.UserRepository
@@ -20,7 +22,7 @@ class UserListFragment : Fragment() {
     private val emptyText by lazy { getString(R.string.empty_text) }
     private lateinit var binding: UserListFragmentBinding
     private val userRepository by lazy {
-        UserRepository(UserDataBase.getInstance(requireContext()))
+        UserRepository(UserDataBase.getInstance(requireContext()).userDao, RetrofitClient.api)
     }
 
     private val userNameAdapter by lazy {
@@ -55,10 +57,6 @@ class UserListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-
-
-
         binding = UserListFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -71,16 +69,14 @@ class UserListFragment : Fragment() {
             userRecyclerView.adapter = userNameAdapter
             emptyMessageView.isVisible = false
         }
-        userListViewModel.userFirstNameList.observe(
-            viewLifecycleOwner,
-            { userNameList ->
+        userListViewModel.userFirstNameList.observe(viewLifecycleOwner) { userNameList ->
                 userNameAdapter.submitList(userNameList)
                 binding.gettingUserInfoProgressBar.isVisible = false
                 if (userNameList.isEmpty()) {
                     binding.emptyMessageView.isVisible = true
                     binding.emptyMessageView.text = emptyText
                 }
-            })
-
+            }
     }
+
 }

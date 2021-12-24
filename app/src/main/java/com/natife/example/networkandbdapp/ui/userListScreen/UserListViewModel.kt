@@ -26,7 +26,8 @@ class UserListViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val newUsers = repository.getAllUsers()
-                _userFirstNameList.postValue(newUsers)
+                val currentUsers = _userFirstNameList.value ?: listOf()
+                _userFirstNameList.postValue(currentUsers + newUsers)
             } catch (e: Exception) {
                 e.printStackTrace()
             }

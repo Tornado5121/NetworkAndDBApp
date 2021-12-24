@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.natife.example.networkandbdapp.api.RetrofitClient
 import com.natife.example.networkandbdapp.databinding.UserDetailedFragmentBinding
 import com.natife.example.networkandbdapp.db.UserDataBase
 import com.natife.example.networkandbdapp.repositories.UserRepository
@@ -15,7 +16,7 @@ class UserDetailedFragment : Fragment() {
 
     private lateinit var binding: UserDetailedFragmentBinding
     private val userRepository by lazy {
-        UserRepository(UserDataBase.getInstance(requireContext()))
+        UserRepository(UserDataBase.getInstance(requireContext()).userDao, RetrofitClient.api)
     }
 
     private val detailedViewModelFactory by lazy {
