@@ -8,6 +8,7 @@ import com.natife.example.networkandbdapp.domain.asDatabaseModel
 import com.natife.example.networkandbdapp.models.asDomainModel
 
 class UserRepository(private val userDao: UserDao, private val api: Requests) {
+
     private val numberRequestedUsers = 10
     private var isLoadingNeeded = true
 

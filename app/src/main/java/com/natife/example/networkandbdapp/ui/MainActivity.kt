@@ -12,6 +12,13 @@ import com.natife.example.networkandbdapp.ui.userListScreen.UserListFragment
 
 class MainActivity : AppCompatActivity() {
 
+    private val userRepository =
+        UserRepository(
+            UserDataBase.getInstance(applicationContext).userDao,
+            RetrofitClient.api
+        )
+
+    private val mainActivityVieModel = MainActivityViewModel(userRepository)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,17 +28,9 @@ class MainActivity : AppCompatActivity() {
             val fragment = UserListFragment()
             supportFragmentManager.beginTransaction()
                 .add(R.id.main_activity_fragment_container, fragment).commit()
-
-
-            val userRepository =
-                UserRepository(
-                    UserDataBase.getInstance(applicationContext).userDao,
-                    RetrofitClient.api
-                )
-
-            val mainActivityVieModel = MainActivityViewModel(userRepository)
-
-            mainActivityVieModel.clearDb()
         }
+
+        mainActivityVieModel.clearDb()
     }
+
 }
