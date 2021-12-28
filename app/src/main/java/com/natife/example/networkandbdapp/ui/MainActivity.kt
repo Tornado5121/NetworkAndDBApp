@@ -37,11 +37,6 @@ class MainActivity : AppCompatActivity() {
         clearDB()
     }
 
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        isFirstRequest = true
-//    }
-
     private fun clearDB() {
         mainActivityVieModel.clearDbForFirstLaunchAfterNoInternet()
     }
