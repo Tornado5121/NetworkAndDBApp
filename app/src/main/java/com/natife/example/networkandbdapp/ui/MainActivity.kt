@@ -12,13 +12,18 @@ import com.natife.example.networkandbdapp.ui.userListScreen.UserListFragment
 
 class MainActivity : AppCompatActivity() {
 
-    private val userRepository =
+    companion object {
+        var isFirstRequest = true
+    }
+
+    private val mainActivityVieModel by lazy { MainActivityViewModel(userRepository) }
+
+    private val userRepository by lazy {
         UserRepository(
             UserDataBase.getInstance(applicationContext).userDao,
             RetrofitClient.api
         )
-
-    private val mainActivityVieModel = MainActivityViewModel(userRepository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +34,16 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction()
                 .add(R.id.main_activity_fragment_container, fragment).commit()
         }
+        clearDB()
+    }
 
-        mainActivityVieModel.clearDb()
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        isFirstRequest = true
+//    }
+
+    private fun clearDB() {
+        mainActivityVieModel.clearDbForFirstLaunchAfterNoInternet()
     }
 
 }

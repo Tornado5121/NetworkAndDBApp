@@ -8,9 +8,10 @@ import kotlinx.coroutines.launch
 
 class MainActivityViewModel(private val userRepository: UserRepository): ViewModel() {
 
-    fun clearDb() {
+    fun clearDbForFirstLaunchAfterNoInternet() {
         viewModelScope.launch(Dispatchers.IO) {
-            userRepository.clearDb()
+            userRepository.checkInternet()
         }
     }
+
 }

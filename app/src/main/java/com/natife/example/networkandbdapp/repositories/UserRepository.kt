@@ -6,24 +6,22 @@ import com.natife.example.networkandbdapp.db.asDomainModel
 import com.natife.example.networkandbdapp.domain.DomainUser
 import com.natife.example.networkandbdapp.domain.asDatabaseModel
 import com.natife.example.networkandbdapp.models.asDomainModel
+import com.natife.example.networkandbdapp.ui.MainActivity
 
 class UserRepository(private val userDao: UserDao, private val api: Requests) {
 
     private val numberRequestedUsers = 10
-    private var isLoadingNeeded = true
 
     suspend fun getAllUsers(): List<DomainUser> {
         return try {
             val users = api.getUserInfo(numberRequestedUsers).asDomainModel()
-            if (!isLoadingNeeded) {
-                isLoadingNeeded = true
-            }
             userDao.insert(users.asDatabaseModel())
+            MainActivity.isFirstRequest = false
             users
         } catch (e: Exception) {
             e.printStackTrace()
-            if (isLoadingNeeded) {
-                isLoadingNeeded = false
+            if (MainActivity.isFirstRequest) {
+                MainActivity.isFirstRequest = false
                 userDao.getAllUsers().asDomainModel()
             } else {
                 emptyList()
@@ -35,8 +33,13 @@ class UserRepository(private val userDao: UserDao, private val api: Requests) {
         return userDao.getUser(id).asDomainModel()
     }
 
-    fun clearDb() {
-        userDao.clearAllUsers()
+    suspend fun checkInternet() {
+        try {
+            api.getUserInfo(numberRequestedUsers).asDomainModel()
+            userDao.clearAllUsers()
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
     }
 
 }
