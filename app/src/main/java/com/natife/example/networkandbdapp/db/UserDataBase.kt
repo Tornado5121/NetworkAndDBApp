@@ -26,13 +26,18 @@ abstract class UserDataBase : RoomDatabase() {
             }
 
             synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    UserDataBase::class.java,
-                    "user_database"
-                ).build()
-                INSTANCE = instance
-                return instance
+                val dataBaseInstance = INSTANCE
+                return if (dataBaseInstance != null) {
+                    dataBaseInstance
+                } else {
+                    val instance = Room.databaseBuilder(
+                        context.applicationContext,
+                        UserDataBase::class.java,
+                        "user_database"
+                    ).build()
+                    INSTANCE = instance
+                    instance
+                }
             }
         }
     }
