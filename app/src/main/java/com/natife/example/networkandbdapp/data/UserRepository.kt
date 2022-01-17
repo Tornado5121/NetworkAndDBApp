@@ -1,12 +1,11 @@
 package com.natife.example.networkandbdapp.data
 
-import com.natife.example.networkandbdapp.data.database.UserRepository
 import com.natife.example.networkandbdapp.domain.DomainUser
 
 class UserRepository(
-    private val databaseRepo: UserRepository,
+    private val databaseRepo: UserDataRepository,
     private val userFetcher: UserFetcher
-) : UserRepository {
+) : UserDataRepository {
 
     private var isFirstRequest = true
 

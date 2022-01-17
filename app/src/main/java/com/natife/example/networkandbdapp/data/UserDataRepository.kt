@@ -1,9 +1,8 @@
-package com.natife.example.networkandbdapp.data.database
+package com.natife.example.networkandbdapp.data
 
-import com.natife.example.networkandbdapp.data.UserFetcher
 import com.natife.example.networkandbdapp.domain.DomainUser
 
-interface UserRepository : UserFetcher {
+interface UserDataRepository : UserFetcher {
 
     suspend fun saveUsers(users: List<DomainUser>)
     suspend fun getUserById(id: String): DomainUser
