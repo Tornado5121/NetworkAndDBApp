@@ -1,4 +1,4 @@
-package com.natife.example.networkandbdapp.db
+package com.natife.example.networkandbdapp.data.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

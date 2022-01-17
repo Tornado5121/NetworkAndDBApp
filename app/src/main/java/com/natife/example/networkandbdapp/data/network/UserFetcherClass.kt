@@ -1,6 +1,6 @@
-package com.natife.example.networkandbdapp.model
+package com.natife.example.networkandbdapp.data.network
 
-import com.natife.example.networkandbdapp.api.Requests
+import com.natife.example.networkandbdapp.data.UserFetcher
 import com.natife.example.networkandbdapp.domain.DomainUser
 import com.natife.example.networkandbdapp.retrofitModels.asDomainModel
 
@@ -11,4 +11,5 @@ class UserFetcherClass(private val api: Requests) : UserFetcher {
     override suspend fun getUsers(): List<DomainUser> {
         return api.getUserInfo(numberRequestedUsers).asDomainModel()
     }
+
 }

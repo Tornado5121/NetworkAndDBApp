@@ -1,4 +1,4 @@
-package com.natife.example.networkandbdapp.api
+package com.natife.example.networkandbdapp.data.network
 
 import com.natife.example.networkandbdapp.retrofitModels.UserArray
 import retrofit2.http.GET

@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.natife.example.networkandbdapp.api.RetrofitClient
+import com.natife.example.networkandbdapp.data.UserFetcher
+import com.natife.example.networkandbdapp.data.network.RetrofitClient
 import com.natife.example.networkandbdapp.databinding.UserDetailedFragmentBinding
-import com.natife.example.networkandbdapp.db.UserDataBase
-import com.natife.example.networkandbdapp.model.DataBaseRepository
-import com.natife.example.networkandbdapp.model.UserFetcher
-import com.natife.example.networkandbdapp.model.UserFetcherClass
-import com.natife.example.networkandbdapp.model.UserRepository
+import com.natife.example.networkandbdapp.data.database.UserDataBase
+import com.natife.example.networkandbdapp.data.database.DataBaseRepository
+import com.natife.example.networkandbdapp.data.network.UserFetcherClass
+import com.natife.example.networkandbdapp.data.UserRepository
 
 class UserDetailedFragment : Fragment() {
 

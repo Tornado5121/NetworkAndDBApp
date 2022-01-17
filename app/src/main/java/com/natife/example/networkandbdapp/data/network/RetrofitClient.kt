@@ -1,4 +1,4 @@
-package com.natife.example.networkandbdapp.api
+package com.natife.example.networkandbdapp.data.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

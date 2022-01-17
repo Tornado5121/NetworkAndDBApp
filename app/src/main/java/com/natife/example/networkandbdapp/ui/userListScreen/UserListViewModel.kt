@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.natife.example.networkandbdapp.domain.DomainUser
-import com.natife.example.networkandbdapp.model.UserRepository
+import com.natife.example.networkandbdapp.data.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

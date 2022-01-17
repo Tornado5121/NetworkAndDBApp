@@ -9,13 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.natife.example.networkandbdapp.R
-import com.natife.example.networkandbdapp.api.RetrofitClient
+import com.natife.example.networkandbdapp.data.UserFetcher
+import com.natife.example.networkandbdapp.data.network.RetrofitClient
 import com.natife.example.networkandbdapp.databinding.UserListFragmentBinding
-import com.natife.example.networkandbdapp.db.UserDataBase
-import com.natife.example.networkandbdapp.model.DataBaseRepository
-import com.natife.example.networkandbdapp.model.UserFetcher
-import com.natife.example.networkandbdapp.model.UserFetcherClass
-import com.natife.example.networkandbdapp.model.UserRepository
+import com.natife.example.networkandbdapp.data.database.UserDataBase
+import com.natife.example.networkandbdapp.data.database.DataBaseRepository
+import com.natife.example.networkandbdapp.data.network.UserFetcherClass
+import com.natife.example.networkandbdapp.data.UserRepository
 import com.natife.example.networkandbdapp.ui.userDetailedScreen.UserDetailedFragment
 import com.natife.example.networkandbdapp.ui.userListScreen.adapters.UserListAdapter
 

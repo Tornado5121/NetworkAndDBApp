@@ -1,11 +1,10 @@
-package com.natife.example.networkandbdapp.model
+package com.natife.example.networkandbdapp.data.database
 
-import com.natife.example.networkandbdapp.db.UserDao
-import com.natife.example.networkandbdapp.db.asDomainModel
 import com.natife.example.networkandbdapp.domain.DomainUser
 import com.natife.example.networkandbdapp.domain.asDatabaseModel
 
-class DataBaseRepository(private val userDao: UserDao) : UserRepository1 {
+class DataBaseRepository(private val userDao: UserDao) : UserRepository {
+
     override suspend fun saveUsers(users: List<DomainUser>) {
         userDao.insert(users.asDatabaseModel())
     }
@@ -21,4 +20,5 @@ class DataBaseRepository(private val userDao: UserDao) : UserRepository1 {
     override suspend fun getUsers(): List<DomainUser> {
         return userDao.getAllUsers().asDomainModel()
     }
+
 }
