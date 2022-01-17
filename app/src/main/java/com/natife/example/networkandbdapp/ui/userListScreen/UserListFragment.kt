@@ -12,7 +12,10 @@ import com.natife.example.networkandbdapp.R
 import com.natife.example.networkandbdapp.api.RetrofitClient
 import com.natife.example.networkandbdapp.databinding.UserListFragmentBinding
 import com.natife.example.networkandbdapp.db.UserDataBase
-import com.natife.example.networkandbdapp.repositories.UserRepository
+import com.natife.example.networkandbdapp.model.DataBaseRepository
+import com.natife.example.networkandbdapp.model.UserFetcher
+import com.natife.example.networkandbdapp.model.UserFetcherClass
+import com.natife.example.networkandbdapp.model.UserRepository
 import com.natife.example.networkandbdapp.ui.userDetailedScreen.UserDetailedFragment
 import com.natife.example.networkandbdapp.ui.userListScreen.adapters.UserListAdapter
 
@@ -20,8 +23,20 @@ class UserListFragment : Fragment() {
 
     private val emptyText by lazy { getString(R.string.empty_text) }
     private lateinit var binding: UserListFragmentBinding
+    private val dataBaseRepository: DataBaseRepository by lazy {
+        DataBaseRepository(
+            UserDataBase.getInstance(
+                requireContext()
+            ).userDao
+        )
+    }
+    private val userFetcher: UserFetcher by lazy { UserFetcherClass(RetrofitClient.api) }
+
     private val userRepository by lazy {
-        UserRepository(UserDataBase.getInstance(requireContext()).userDao, RetrofitClient.api)
+        UserRepository(
+            dataBaseRepository,
+            userFetcher
+        )
     }
 
     private val userNameAdapter by lazy {
@@ -69,13 +84,13 @@ class UserListFragment : Fragment() {
             emptyMessageView.isVisible = false
         }
         userListViewModel.userFirstNameList.observe(viewLifecycleOwner) { userNameList ->
-                userNameAdapter.submitList(userNameList)
-                binding.gettingUserInfoProgressBar.isVisible = false
-                if (userNameList.isEmpty()) {
-                    binding.emptyMessageView.isVisible = true
-                    binding.emptyMessageView.text = emptyText
-                }
+            userNameAdapter.submitList(userNameList)
+            binding.gettingUserInfoProgressBar.isVisible = false
+            if (userNameList.isEmpty()) {
+                binding.emptyMessageView.isVisible = true
+                binding.emptyMessageView.text = emptyText
             }
+        }
     }
 
 }

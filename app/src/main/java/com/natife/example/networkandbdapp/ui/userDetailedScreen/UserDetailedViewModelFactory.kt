@@ -2,7 +2,7 @@ package com.natife.example.networkandbdapp.ui.userDetailedScreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.natife.example.networkandbdapp.repositories.UserRepository
+import com.natife.example.networkandbdapp.model.UserRepository
 
 class UserListViewModelFactory(
     private val repository: UserRepository

@@ -10,13 +10,27 @@ import com.bumptech.glide.Glide
 import com.natife.example.networkandbdapp.api.RetrofitClient
 import com.natife.example.networkandbdapp.databinding.UserDetailedFragmentBinding
 import com.natife.example.networkandbdapp.db.UserDataBase
-import com.natife.example.networkandbdapp.repositories.UserRepository
+import com.natife.example.networkandbdapp.model.DataBaseRepository
+import com.natife.example.networkandbdapp.model.UserFetcher
+import com.natife.example.networkandbdapp.model.UserFetcherClass
+import com.natife.example.networkandbdapp.model.UserRepository
 
 class UserDetailedFragment : Fragment() {
 
     private lateinit var binding: UserDetailedFragmentBinding
+    private val dataBaseRepository: DataBaseRepository by lazy {
+        DataBaseRepository(
+            UserDataBase.getInstance(
+                requireContext()
+            ).userDao
+        )
+    }
+    private val userFetcher: UserFetcher by lazy { UserFetcherClass(RetrofitClient.api) }
     private val userRepository by lazy {
-        UserRepository(UserDataBase.getInstance(requireContext()).userDao, RetrofitClient.api)
+        UserRepository(
+            dataBaseRepository,
+            userFetcher
+        )
     }
 
     private val detailedViewModelFactory by lazy {

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.natife.example.networkandbdapp.domain.DomainUser
-import com.natife.example.networkandbdapp.repositories.UserRepository
+import com.natife.example.networkandbdapp.model.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -18,14 +18,14 @@ class UserListViewModel(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            _userFirstNameList.postValue(repository.getAllUsers())
+            _userFirstNameList.postValue(repository.getUsers())
         }
     }
 
     fun getNextPageUserData() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val newUsers = repository.getAllUsers()
+                val newUsers = repository.getUsers()
                 val currentUsers = _userFirstNameList.value ?: listOf()
                 _userFirstNameList.postValue(currentUsers + newUsers)
             } catch (e: Exception) {

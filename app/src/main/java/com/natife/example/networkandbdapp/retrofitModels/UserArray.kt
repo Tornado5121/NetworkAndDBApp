@@ -1,4 +1,4 @@
-package com.natife.example.networkandbdapp.models
+package com.natife.example.networkandbdapp.retrofitModels
 
 import com.natife.example.networkandbdapp.domain.DomainUser
 

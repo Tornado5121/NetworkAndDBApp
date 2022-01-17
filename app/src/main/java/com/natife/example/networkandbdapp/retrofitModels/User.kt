@@ -1,4 +1,4 @@
-package com.natife.example.networkandbdapp.models
+package com.natife.example.networkandbdapp.retrofitModels
 
 import com.google.gson.annotations.SerializedName
 
