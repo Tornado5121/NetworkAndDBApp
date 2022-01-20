@@ -15,15 +15,15 @@ import org.koin.core.qualifier.StringQualifier
 import org.koin.dsl.module
 
 val UserDBRepQualifier = StringQualifier("Test1")
-val UserRepQualifier = StringQualifier("Test2")
+
 
 val dataModule = module {
     factory<UserFetcher> { UserFetcherImpl(RetrofitClient.api) }
     factory<UserDataRepository> (UserDBRepQualifier){ DataBaseRepository(UserDataBase.getInstance(androidContext()).userDao) }
-    single<UserDataRepository> (UserRepQualifier) { UserRepository(get(UserDBRepQualifier), get()) }
+    single<UserDataRepository> { UserRepository(get(UserDBRepQualifier), get()) }
 }
 
 val userListViewModelModule = module {
-    viewModel { UserListViewModel(get(UserRepQualifier)) }
-    viewModel { UserDetailedViewModel(get(UserRepQualifier)) }
+    viewModel { UserListViewModel(get()) }
+    viewModel { (id: String) -> UserDetailedViewModel(get(), id) }
 }

@@ -8,12 +8,15 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.natife.example.networkandbdapp.databinding.UserDetailedFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class UserDetailedFragment : Fragment() {
 
     private lateinit var binding: UserDetailedFragmentBinding
 
-    private val detailedViewModel by viewModel<UserDetailedViewModel>()
+    private val detailedViewModel: UserDetailedViewModel by viewModel {
+        parametersOf(requireArguments().getString("user_id").toString())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,7 +35,7 @@ class UserDetailedFragment : Fragment() {
             binding.userGender.text = it.userGender
             Glide.with(this).load(it.userPhotoLink).into(binding.userPhoto)
         })
-        arguments?.let { detailedViewModel.getUserDetailedInfo(it.getString(KEY_ID).toString()) }
+        arguments?.let { detailedViewModel.getUserDetailedInfo() }
     }
 
     companion object {
