@@ -5,44 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.natife.example.networkandbdapp.data.UserFetcher
-import com.natife.example.networkandbdapp.data.network.RetrofitClient
 import com.natife.example.networkandbdapp.databinding.UserDetailedFragmentBinding
-import com.natife.example.networkandbdapp.data.database.UserDataBase
-import com.natife.example.networkandbdapp.data.database.DataBaseRepository
-import com.natife.example.networkandbdapp.data.network.UserFetcherImpl
-import com.natife.example.networkandbdapp.data.UserRepository
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UserDetailedFragment : Fragment() {
 
     private lateinit var binding: UserDetailedFragmentBinding
-    private val dataBaseRepository: DataBaseRepository by lazy {
-        DataBaseRepository(
-            UserDataBase.getInstance(
-                requireContext()
-            ).userDao
-        )
-    }
-    private val userFetcher: UserFetcher by lazy { UserFetcherImpl(RetrofitClient.api) }
-    private val userRepository by lazy {
-        UserRepository(
-            dataBaseRepository,
-            userFetcher
-        )
-    }
 
-    private val detailedViewModelFactory by lazy {
-        UserListViewModelFactory(userRepository)
-    }
-
-    private val detailedViewModel by lazy {
-        ViewModelProvider(
-            this,
-            detailedViewModelFactory
-        )[UserDetailedViewModel::class.java]
-    }
+    private val detailedViewModel by viewModel<UserDetailedViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

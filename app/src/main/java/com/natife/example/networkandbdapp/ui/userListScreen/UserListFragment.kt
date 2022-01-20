@@ -11,14 +11,14 @@ import com.natife.example.networkandbdapp.R
 import com.natife.example.networkandbdapp.databinding.UserListFragmentBinding
 import com.natife.example.networkandbdapp.ui.userDetailedScreen.UserDetailedFragment
 import com.natife.example.networkandbdapp.ui.userListScreen.adapters.UserListAdapter
-import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UserListFragment : Fragment() {
 
     private val emptyText by lazy { getString(R.string.empty_text) }
     private lateinit var binding: UserListFragmentBinding
 
-    private val userListViewModel by lazy { getViewModel<UserListViewModel>() }
+    private val userListViewModel by viewModel<UserListViewModel>()
 
     private val userNameAdapter by lazy {
         UserListAdapter({

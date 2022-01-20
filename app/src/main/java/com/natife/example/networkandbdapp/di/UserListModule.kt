@@ -7,6 +7,7 @@ import com.natife.example.networkandbdapp.data.database.DataBaseRepository
 import com.natife.example.networkandbdapp.data.database.UserDataBase
 import com.natife.example.networkandbdapp.data.network.RetrofitClient
 import com.natife.example.networkandbdapp.data.network.UserFetcherImpl
+import com.natife.example.networkandbdapp.ui.userDetailedScreen.UserDetailedViewModel
 import com.natife.example.networkandbdapp.ui.userListScreen.UserListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -22,6 +23,7 @@ val dataModule = module {
     single<UserDataRepository> (UserRepQualifier) { UserRepository(get(UserDBRepQualifier), get()) }
 }
 
-val viewModelModule = module {
+val userListViewModelModule = module {
     viewModel { UserListViewModel(get(UserRepQualifier)) }
+    viewModel { UserDetailedViewModel(get(UserRepQualifier)) }
 }
