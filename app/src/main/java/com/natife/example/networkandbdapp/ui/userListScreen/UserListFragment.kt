@@ -6,38 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.natife.example.networkandbdapp.R
-import com.natife.example.networkandbdapp.data.UserFetcher
-import com.natife.example.networkandbdapp.data.network.RetrofitClient
 import com.natife.example.networkandbdapp.databinding.UserListFragmentBinding
-import com.natife.example.networkandbdapp.data.database.UserDataBase
-import com.natife.example.networkandbdapp.data.database.DataBaseRepository
-import com.natife.example.networkandbdapp.data.network.UserFetcherClass
-import com.natife.example.networkandbdapp.data.UserRepository
 import com.natife.example.networkandbdapp.ui.userDetailedScreen.UserDetailedFragment
 import com.natife.example.networkandbdapp.ui.userListScreen.adapters.UserListAdapter
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class UserListFragment : Fragment() {
 
     private val emptyText by lazy { getString(R.string.empty_text) }
     private lateinit var binding: UserListFragmentBinding
-    private val dataBaseRepository: DataBaseRepository by lazy {
-        DataBaseRepository(
-            UserDataBase.getInstance(
-                requireContext()
-            ).userDao
-        )
-    }
-    private val userFetcher: UserFetcher by lazy { UserFetcherClass(RetrofitClient.api) }
 
-    private val userRepository by lazy {
-        UserRepository(
-            dataBaseRepository,
-            userFetcher
-        )
-    }
+    private val userListViewModel by lazy { getViewModel<UserListViewModel>() }
 
     private val userNameAdapter by lazy {
         UserListAdapter({
@@ -51,19 +32,6 @@ class UserListFragment : Fragment() {
             binding.gettingUserInfoProgressBar.isVisible = true
             userListViewModel.getNextPageUserData()
         })
-    }
-
-    private val userListViewModelFactory by lazy {
-        UserListViewModelFactory(
-            userRepository
-        )
-    }
-
-    private val userListViewModel: UserListViewModel by lazy {
-        ViewModelProvider(
-            this,
-            userListViewModelFactory
-        )[UserListViewModel::class.java]
     }
 
     override fun onCreateView(

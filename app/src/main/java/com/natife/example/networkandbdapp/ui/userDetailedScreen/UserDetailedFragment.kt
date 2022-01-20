@@ -12,7 +12,7 @@ import com.natife.example.networkandbdapp.data.network.RetrofitClient
 import com.natife.example.networkandbdapp.databinding.UserDetailedFragmentBinding
 import com.natife.example.networkandbdapp.data.database.UserDataBase
 import com.natife.example.networkandbdapp.data.database.DataBaseRepository
-import com.natife.example.networkandbdapp.data.network.UserFetcherClass
+import com.natife.example.networkandbdapp.data.network.UserFetcherImpl
 import com.natife.example.networkandbdapp.data.UserRepository
 
 class UserDetailedFragment : Fragment() {
@@ -25,7 +25,7 @@ class UserDetailedFragment : Fragment() {
             ).userDao
         )
     }
-    private val userFetcher: UserFetcher by lazy { UserFetcherClass(RetrofitClient.api) }
+    private val userFetcher: UserFetcher by lazy { UserFetcherImpl(RetrofitClient.api) }
     private val userRepository by lazy {
         UserRepository(
             dataBaseRepository,
