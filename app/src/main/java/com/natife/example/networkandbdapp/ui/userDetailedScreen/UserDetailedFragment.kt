@@ -35,7 +35,7 @@ class UserDetailedFragment : Fragment() {
             binding.userGender.text = it.userGender
             Glide.with(this).load(it.userPhotoLink).into(binding.userPhoto)
         })
-        arguments?.let { detailedViewModel.getUserDetailedInfo() }
+        detailedViewModel.getUserDetailedInfo()
     }
 
     companion object {

@@ -2,7 +2,6 @@ package com.natife.example.networkandbdapp.domain
 
 import com.natife.example.networkandbdapp.data.database.UserEntity
 
-
 data class DomainUser(
     val id: String,
     val name: String,

@@ -4,7 +4,9 @@ import com.natife.example.networkandbdapp.data.UserFetcher
 import com.natife.example.networkandbdapp.domain.DomainUser
 import com.natife.example.networkandbdapp.retrofitModels.asDomainModel
 
-class UserFetcherImpl(private val api: Requests) : UserFetcher {
+class UserFetcherImpl(
+    private val api: Requests
+) : UserFetcher {
 
     private val numberRequestedUsers = 10
 

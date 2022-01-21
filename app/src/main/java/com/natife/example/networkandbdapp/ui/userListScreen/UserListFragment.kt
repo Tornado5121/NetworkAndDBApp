@@ -15,7 +15,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UserListFragment : Fragment() {
 
-    private val emptyText by lazy { getString(R.string.empty_text) }
     private lateinit var binding: UserListFragmentBinding
 
     private val userListViewModel by viewModel<UserListViewModel>()
@@ -49,15 +48,10 @@ class UserListFragment : Fragment() {
             gettingUserInfoProgressBar.isVisible = true
             userRecyclerView.layoutManager = LinearLayoutManager(activity)
             userRecyclerView.adapter = userNameAdapter
-            emptyMessageView.isVisible = false
         }
         userListViewModel.userFirstNameList.observe(viewLifecycleOwner) { userNameList ->
             userNameAdapter.submitList(userNameList)
             binding.gettingUserInfoProgressBar.isVisible = false
-            if (userNameList.isEmpty()) {
-                binding.emptyMessageView.isVisible = true
-                binding.emptyMessageView.text = emptyText
-            }
         }
     }
 

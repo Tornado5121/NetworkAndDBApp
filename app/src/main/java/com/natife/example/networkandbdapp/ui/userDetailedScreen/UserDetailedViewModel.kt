@@ -10,7 +10,10 @@ import com.natife.example.networkandbdapp.domain.asDatabaseModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class UserDetailedViewModel(private val userRepository: UserDataRepository, private val id: String) : ViewModel() {
+class UserDetailedViewModel(
+    private val userRepository: UserDataRepository,
+    private val id: String
+) : ViewModel() {
 
     private val _detailedUser = MutableLiveData<UserEntity>()
     val detailedUser: LiveData<UserEntity> = _detailedUser
