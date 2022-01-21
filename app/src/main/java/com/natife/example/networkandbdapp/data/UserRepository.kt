@@ -1,8 +1,11 @@
 package com.natife.example.networkandbdapp.data
 
 import com.natife.example.networkandbdapp.domain.DomainUser
+import javax.inject.Inject
+import javax.inject.Named
 
-class UserRepository(
+@Named("userRepo")
+class UserRepository @Inject constructor(
     private val databaseRepo: UserDataRepository,
     private val userFetcher: UserFetcher
 ) : UserDataRepository {

@@ -12,35 +12,36 @@ import com.natife.example.networkandbdapp.data.network.RetrofitClient
 import com.natife.example.networkandbdapp.databinding.UserDetailedFragmentBinding
 import com.natife.example.networkandbdapp.data.database.UserDataBase
 import com.natife.example.networkandbdapp.data.database.DataBaseRepository
-import com.natife.example.networkandbdapp.data.network.UserFetcherClass
+import com.natife.example.networkandbdapp.data.network.UserFetcherImpl
 import com.natife.example.networkandbdapp.data.UserRepository
+import retrofit2.Retrofit
 
 class UserDetailedFragment : Fragment() {
 
     private lateinit var binding: UserDetailedFragmentBinding
-    private val dataBaseRepository: DataBaseRepository by lazy {
-        DataBaseRepository(
-            UserDataBase.getInstance(
-                requireContext()
-            ).userDao
-        )
-    }
-    private val userFetcher: UserFetcher by lazy { UserFetcherClass(RetrofitClient.api) }
-    private val userRepository by lazy {
-        UserRepository(
-            dataBaseRepository,
-            userFetcher
-        )
-    }
+//    private val dataBaseRepository: DataBaseRepository by lazy {
+//        DataBaseRepository(
+//            UserDataBase.getInstance(
+//                requireContext()
+//            ).userDao
+//        )
+//    }
+//    private val userFetcher: UserFetcher by lazy { UserFetcherImpl() }
+//    private val userRepository by lazy {
+//        UserRepository(
+//            dataBaseRepository,
+//            userFetcher
+//        )
+//    }
 
-    private val detailedViewModelFactory by lazy {
-        UserListViewModelFactory(userRepository)
-    }
+//    private val detailedViewModelFactory by lazy {
+//        UserListViewModelFactory(userRepository)
+//    }
 
     private val detailedViewModel by lazy {
         ViewModelProvider(
             this,
-            detailedViewModelFactory
+//            detailedViewModelFactory
         )[UserDetailedViewModel::class.java]
     }
 

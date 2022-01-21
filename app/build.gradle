@@ -38,6 +38,7 @@ android {
 
 ext {
     roomVersion = '2.4.0'
+    daggerVer = '2.28.3'
 }
 
 dependencies {
@@ -65,7 +66,12 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     //Dagger
-    implementation 'com.google.dagger:dagger:2.28.3'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.0'
+    implementation "com.google.dagger:dagger:$daggerVer"
+    implementation "com.google.dagger:dagger-android-support:$daggerVer"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVer"
+    kapt "com.google.dagger:dagger-compiler:$daggerVer"
+
+    implementation "com.google.dagger:dagger-android:2.35.1"
+    kapt  "com.google.dagger:dagger-android-support:2.28.3"
 
 }
