@@ -7,10 +7,14 @@ import com.natife.example.networkandbdapp.di.DaggerAppComponent
 
 class MyApp : Application() {
 
-    val appComponent:AppComponent by lazy {
-        DaggerAppComponent.builder()
-            .contextModule(ContextModule(this))
-            .build()
+    lateinit var appComponent: AppComponent
+
+    override fun onCreate() {
+        super.onCreate()
+        appComponent =
+            DaggerAppComponent.builder()
+                .contextModule(ContextModule(this))
+                .build()
     }
 
 }

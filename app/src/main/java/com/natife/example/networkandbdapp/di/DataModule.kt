@@ -1,6 +1,6 @@
 package com.natife.example.networkandbdapp.di
 
-import android.app.Application
+import android.content.Context
 import com.natife.example.networkandbdapp.data.UserDataRepository
 import com.natife.example.networkandbdapp.data.UserFetcher
 import com.natife.example.networkandbdapp.data.UserRepository
@@ -20,7 +20,7 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun getUserFetcher(): UserFetcher {
+    fun provideUserFetcherImpl(): UserFetcher {
         return UserFetcherImpl(
             Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
@@ -32,15 +32,18 @@ class DataModule {
     @Singleton
     @Provides
     @Named("databaseRepo")
-    fun getDataBaseRepo(application: Application): UserDataRepository {
-        return DataBaseRepository(UserDataBase.getInstance(application).userDao)
+    fun provideDatabaseRepository(context: Context): UserDataRepository {
+        return DataBaseRepository(UserDataBase.getInstance(context).userDao)
     }
 
     @Singleton
     @Provides
-    @Named("userRepo")
-    fun getUserRepo(application: Application): UserDataRepository {
-        return UserRepository(getDataBaseRepo(application), getUserFetcher())
+    fun provideUserRepo(
+        @Named("databaseRepo")
+        databaseRepository: UserDataRepository,
+        userFetcher: UserFetcher
+    ): UserDataRepository {
+        return UserRepository(databaseRepository, userFetcher)
     }
 
 }

@@ -1,36 +1,26 @@
 package com.natife.example.networkandbdapp.di
 
 import android.content.Context
-import com.natife.example.networkandbdapp.ui.MainActivity
+import com.natife.example.networkandbdapp.ui.userDetailedScreen.UserDetailedFragment
 import com.natife.example.networkandbdapp.ui.userListScreen.UserListFragment
 import dagger.Component
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Component(
-    modules = [
-        DataModule::class,
-    ]
+    modules = [ContextModule::class, DataModule::class]
 )
-interface DataComponent {}
-
-@Component(
-    dependencies = [
-        DataComponent::class
-    ],
-    modules = [ContextModule::class]
-)
+@Singleton
 interface AppComponent {
 
     fun inject(userListFragment: UserListFragment)
+    fun inject(userDetailedFragment: UserDetailedFragment)
 
     @Component.Builder
     interface Builder {
 
         fun contextModule(contextModule: ContextModule): Builder
-
-        fun dataComponent(dataComponent: DataComponent): Builder
-
         fun build(): AppComponent
 
     }
@@ -44,4 +34,5 @@ class ContextModule(private val context: Context) {
     fun provideContext(): Context {
         return context
     }
+
 }

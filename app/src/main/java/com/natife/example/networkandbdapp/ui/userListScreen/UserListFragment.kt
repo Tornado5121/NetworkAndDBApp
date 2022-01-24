@@ -8,41 +8,20 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.natife.example.networkandbdapp.MyApp
 import com.natife.example.networkandbdapp.R
 import com.natife.example.networkandbdapp.data.UserDataRepository
 import com.natife.example.networkandbdapp.databinding.UserListFragmentBinding
-import com.natife.example.networkandbdapp.di.DaggerAppComponent
-import com.natife.example.networkandbdapp.di.DaggerDataComponent
 import com.natife.example.networkandbdapp.ui.userDetailedScreen.UserDetailedFragment
 import com.natife.example.networkandbdapp.ui.userListScreen.adapters.UserListAdapter
 import javax.inject.Inject
-import javax.inject.Named
 
 class UserListFragment : Fragment() {
 
-//    @field:[Inject Named("userRepo")]
+    @Inject
+    lateinit var userRepository: UserDataRepository
 
-    @Named("userRepo")
-    @Inject lateinit var userRepository: UserDataRepository
-
-    private val emptyText by lazy { getString(R.string.empty_text) }
     private lateinit var binding: UserListFragmentBinding
-
-//    private val dataBaseRepository: DataBaseRepository by lazy {
-//        DataBaseRepository(
-//            UserDataBase.getInstance(
-//                requireContext()
-//            ).userDao
-//        )
-//    }
-//    private val userFetcher: UserFetcher by lazy { UserFetcherImpl(RetrofitClient.api) }
-//
-//    private val userRepository by lazy {
-//        UserRepository(
-//            dataBaseRepository,
-//            userFetcher
-//        )
-//    }
 
     private val userNameAdapter by lazy {
         UserListAdapter({
@@ -64,7 +43,6 @@ class UserListFragment : Fragment() {
         )
     }
 
-
     private val userListViewModel: UserListViewModel by lazy {
         ViewModelProvider(
             this,
@@ -83,23 +61,16 @@ class UserListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        DaggerAppComponent.builder().dataComponent(DaggerDataComponent.create()).build().inject(
-            this
-        )
+        (requireContext().applicationContext as MyApp).appComponent.inject(this)
 
         with(binding) {
             gettingUserInfoProgressBar.isVisible = true
             userRecyclerView.layoutManager = LinearLayoutManager(activity)
             userRecyclerView.adapter = userNameAdapter
-            emptyMessageView.isVisible = false
         }
         userListViewModel.userFirstNameList.observe(viewLifecycleOwner) { userNameList ->
             userNameAdapter.submitList(userNameList)
             binding.gettingUserInfoProgressBar.isVisible = false
-            if (userNameList.isEmpty()) {
-                binding.emptyMessageView.isVisible = true
-                binding.emptyMessageView.text = emptyText
-            }
         }
     }
 

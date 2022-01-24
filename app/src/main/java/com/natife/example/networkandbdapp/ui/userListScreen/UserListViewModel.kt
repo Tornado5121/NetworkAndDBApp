@@ -4,13 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.natife.example.networkandbdapp.data.UserDataRepository
 import com.natife.example.networkandbdapp.domain.DomainUser
 import com.natife.example.networkandbdapp.data.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class UserListViewModel(
-    private val repository: UserRepository
+    private val repository: UserDataRepository
 ) : ViewModel() {
 
     private val _userFirstNameList = MutableLiveData<List<DomainUser>>()
