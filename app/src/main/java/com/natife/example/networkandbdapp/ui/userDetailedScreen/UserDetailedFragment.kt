@@ -18,20 +18,6 @@ class UserDetailedFragment : Fragment() {
     lateinit var userRepository: UserRepository
 
     private lateinit var binding: UserDetailedFragmentBinding
-//    private val dataBaseRepository: DataBaseRepository by lazy {
-//        DataBaseRepository(
-//            UserDataBase.getInstance(
-//                requireContext()
-//            ).userDao
-//        )
-//    }
-//    private val userFetcher: UserFetcher by lazy { UserFetcherImpl() }
-//    private val userRepository by lazy {
-//        UserRepository(
-//            dataBaseRepository,
-//            userFetcher
-//        )
-//    }
 
     private val detailedViewModelFactory by lazy {
         UserListViewModelFactory(userRepository)

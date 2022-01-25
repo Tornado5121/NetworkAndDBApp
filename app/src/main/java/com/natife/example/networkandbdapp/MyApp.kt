@@ -1,9 +1,9 @@
 package com.natife.example.networkandbdapp
 
 import android.app.Application
-import com.natife.example.networkandbdapp.di.AppComponent
-import com.natife.example.networkandbdapp.di.ContextModule
-import com.natife.example.networkandbdapp.di.DaggerAppComponent
+import com.natife.example.networkandbdapp.di.component.AppComponent
+import com.natife.example.networkandbdapp.di.component.ContextModule
+import com.natife.example.networkandbdapp.di.component.DaggerAppComponent
 
 class MyApp : Application() {
 

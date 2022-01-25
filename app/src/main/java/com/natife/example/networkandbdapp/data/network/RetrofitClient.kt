@@ -1,16 +1,13 @@
 package com.natife.example.networkandbdapp.data.network
 
-import dagger.Module
-import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-@Module
-object RetrofitClient {
+private const val BASE_URL = "https://randomuser.me/"
 
-    private const val BASE_URL = "https://randomuser.me/"
+class RetrofitClient @Inject constructor ()  {
 
-    @Provides
     fun retrofit(): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -18,7 +15,6 @@ object RetrofitClient {
             .build()
     }
 
-    @Provides
     fun requests(retrofit: Retrofit): Requests {
         return retrofit.create(Requests::class.java)
     }
