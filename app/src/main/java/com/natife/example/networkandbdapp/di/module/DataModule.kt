@@ -20,16 +20,6 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun provideUserRepo(
-        @MyDatabaseRepo
-        databaseRepository: UserDataRepository,
-        userFetcher: UserFetcher
-    ): UserDataRepository {
-        return UserRepository(databaseRepository, userFetcher)
-    }
-
-    @Singleton
-    @Provides
     fun providesDao(context: Context): UserDao {
         return UserDataBase.getInstance(context).userDao
     }
