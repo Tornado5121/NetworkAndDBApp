@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.natife.example.networkandbdapp.R
 import com.natife.example.networkandbdapp.databinding.ActivityMainBinding
 import com.natife.example.networkandbdapp.ui.userListScreen.UserListFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

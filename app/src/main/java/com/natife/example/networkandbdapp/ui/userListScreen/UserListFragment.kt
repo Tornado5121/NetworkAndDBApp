@@ -8,14 +8,15 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.natife.example.networkandbdapp.MyApp
 import com.natife.example.networkandbdapp.R
 import com.natife.example.networkandbdapp.data.UserDataRepository
 import com.natife.example.networkandbdapp.databinding.UserListFragmentBinding
 import com.natife.example.networkandbdapp.ui.userDetailedScreen.UserDetailedFragment
 import com.natife.example.networkandbdapp.ui.userListScreen.adapters.UserListAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class UserListFragment : Fragment() {
 
     @Inject
@@ -61,8 +62,6 @@ class UserListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireContext().applicationContext as MyApp).appComponent.inject(this)
-
         with(binding) {
             gettingUserInfoProgressBar.isVisible = true
             userRecyclerView.layoutManager = LinearLayoutManager(activity)

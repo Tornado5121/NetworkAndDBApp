@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.natife.example.networkandbdapp.MyApp
 import com.natife.example.networkandbdapp.data.UserRepository
 import com.natife.example.networkandbdapp.databinding.UserDetailedFragmentBinding
 import javax.inject.Inject
@@ -41,9 +40,6 @@ class UserDetailedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        (requireContext().applicationContext as MyApp).appComponent.inject(this)
-
         detailedViewModel.detailedUser.observe(viewLifecycleOwner, {
             binding.userName.text = it.name
             binding.userLastName.text = it.lastName
